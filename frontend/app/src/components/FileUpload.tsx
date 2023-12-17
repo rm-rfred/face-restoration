@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Button, Grid, Stack } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -6,7 +6,7 @@ import { useSnackbar } from "notistack";
 import { DropzoneArea } from "react-mui-dropzone";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { apiFetch, apiFetchBlob } from "../utils/Fetch";
+import { apiFetchBlob } from "../utils/Fetch";
 
 const useStyles = makeStyles(() => ({
   dropZoneClass: {
@@ -38,17 +38,20 @@ type FormData = {
 };
 
 interface Props {
+  selectedFile: File | null;
+  setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
   setRestoredFile: React.Dispatch<React.SetStateAction<any>>;
   setIsFetching: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const FileUpload: React.FC<Props> = ({
+  selectedFile,
+  setSelectedFile,
   setRestoredFile,
   setIsFetching,
 }) => {
   const classes = useStyles();
   const methods = useForm<FormData>();
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const {
     handleSubmit,
@@ -58,7 +61,6 @@ export const FileUpload: React.FC<Props> = ({
 
   const onSubmit = () => {
     setIsFetching(true);
-    // setBase64Image(null);
 
     if (selectedFile) {
       const formDataToSend = new FormData();
@@ -74,8 +76,8 @@ export const FileUpload: React.FC<Props> = ({
             autoHideDuration: 3000,
           });
           console.error("Error:", error);
-          setIsFetching(false);
-        });
+        })
+        .finally(() => setIsFetching(false));
     } else {
       enqueueSnackbar("Please select an image", {
         variant: "error",
@@ -116,6 +118,7 @@ export const FileUpload: React.FC<Props> = ({
                   item: classes.preview,
                   image: classes.previewImg,
                 }}
+                onDelete={() => setRestoredFile(null)}
                 getPreviewIcon={(file) => {
                   return React.createElement("img", {
                     className: classes.previewImg,

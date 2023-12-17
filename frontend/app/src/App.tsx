@@ -13,10 +13,12 @@ import { Grid as GridLoader } from "react-loader-spinner";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 
 import FileUpload from "./components/FileUpload";
+import ReactCompareImage from "react-compare-image";
 
 function App() {
   const [isFetching, setIsFetching] = useState(false);
   const cookies = new Cookies();
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [themeMode, setThemeMode] = useState<PaletteMode>(
     cookies.get("theme") || "dark"
   );
@@ -119,6 +121,8 @@ function App() {
             <Grid item justifyContent="center" xs={8} md={8}>
               <Stack spacing={2} alignItems="center" justifyContent="center">
                 <FileUpload
+                  selectedFile={selectedFile}
+                  setSelectedFile={setSelectedFile}
                   setRestoredFile={setRestoredFile}
                   setIsFetching={setIsFetching}
                 />
@@ -126,12 +130,20 @@ function App() {
               </Stack>
             </Grid>
           </Grid>
-          {restoredFile && (
-            <img
-              key={0}
-              src={URL.createObjectURL(restoredFile.blob)}
-              alt="restored image"
-            />
+          {selectedFile && restoredFile && (
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              style={{ maxWidth: "80vh", maxHeight: "10vh" }}
+            >
+              <ReactCompareImage
+                leftImageCss={{ objectFit: "contain" }}
+                rightImageCss={{ objectFit: "contain" }}
+                leftImage={URL.createObjectURL(selectedFile)}
+                rightImage={URL.createObjectURL(restoredFile.blob)}
+              />
+            </Grid>
           )}
         </Stack>
       </CssBaseline>
