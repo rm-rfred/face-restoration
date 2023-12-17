@@ -126,24 +126,17 @@ function App() {
               </Stack>
             </Grid>
           </Grid>
-          {/* {base64Image && <img src={`data:image/jpeg;base64,${base64Image}`} />} */}
           {restoredFile && (
             <img
               key={0}
-              // ! There's a bad memory leak here
               src={URL.createObjectURL(restoredFile.blob)}
-              alt="restored"
+              alt="restored image"
             />
-            // <img src={`data:image/jpeg;base64,${restoredFiles[0].blob}`} />
           )}
         </Stack>
       </CssBaseline>
     </ThemeProvider>
   );
-}
-
-{
-  /* <img src="data:image/png;base64,ADD_BASE64_STRING_HERE> */
 }
 
 export default App;

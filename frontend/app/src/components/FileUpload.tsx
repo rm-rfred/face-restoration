@@ -66,7 +66,6 @@ export const FileUpload: React.FC<Props> = ({
 
       apiFetchBlob("/api/face_restoration/restore", "POST", {}, formDataToSend)
         .then((response) => {
-          // console.log(response);
           setRestoredFile({ blob: response });
         })
         .catch((error) => {
