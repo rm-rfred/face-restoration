@@ -61,7 +61,6 @@ export const apiFetchBlob = async (
     const blobData = await response.blob();
 
     if (response.status >= 400 && response.status < 500) {
-        // Handle client-side errors
         throw new Error("Internal server error");
     }
 
