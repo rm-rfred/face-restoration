@@ -110,7 +110,7 @@ export const FileUpload: React.FC<Props> = ({
               <DropzoneArea
                 acceptedFiles={["image/*"]}
                 dropzoneText={"Drop image"}
-                filesLimit={3}
+                filesLimit={1}
                 showAlerts={isDirty}
                 dropzoneClass={classes.dropZoneClass}
                 previewGridClasses={{
@@ -119,6 +119,7 @@ export const FileUpload: React.FC<Props> = ({
                   image: classes.previewImg,
                 }}
                 onDelete={() => setRestoredFile(null)}
+                onDrop={() => setRestoredFile(null)}
                 getPreviewIcon={(file) => {
                   return React.createElement("img", {
                     className: classes.previewImg,

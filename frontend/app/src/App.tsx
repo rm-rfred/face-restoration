@@ -116,7 +116,7 @@ function App() {
             container
             justifyContent="center"
             alignItems="center"
-            style={{ height: "90vh" }}
+            // style={{ maxHeight: "90vh" }}
           >
             <Grid item justifyContent="center" xs={8} md={8}>
               <Stack spacing={2} alignItems="center" justifyContent="center">
@@ -135,7 +135,7 @@ function App() {
               container
               justifyContent="center"
               alignItems="center"
-              style={{ maxWidth: "80vh", maxHeight: "10vh" }}
+              style={{ maxWidth: "30%" }}
             >
               <ReactCompareImage
                 leftImageCss={{ objectFit: "contain" }}
