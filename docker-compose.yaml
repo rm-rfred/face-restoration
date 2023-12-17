@@ -45,5 +45,6 @@ services:
         - .env
     environment:
         MODELS_PATH: ${MODELS_PATH}
+        DEVICE: ${DEVICE}
     volumes:
       - /srv/docker/face-restoration-worker/logs:/logs
