@@ -1,10 +1,19 @@
+from io import BytesIO
 import pickle
 import tempfile
 
 import cv2
 from fastapi import APIRouter, File
+from fastapi.responses import Response
+from simber import Logger
 
 from app.utils.grpc_client import GrpcClient
+
+LOG_FORMAT = "{levelname} [{filename}:{lineno}]:"
+
+LOG_LEVEL: str = "INFO"
+logger = Logger(__name__, log_path="/tmp/logs/server.log", level=LOG_LEVEL)
+logger.update_format(LOG_FORMAT)
 
 router = APIRouter()
 
@@ -22,6 +31,10 @@ async def post_image(endpoint: str = "face-restoration-worker:13000", file: byte
 
         image = cv2.imread(temp_file_path)
 
-        response = GrpcClient.get_face_restoration_from_grpc(endpoint, pickle.dumps(image), timeout=timeout)
+    response = GrpcClient.get_face_restoration_from_grpc(endpoint, pickle.dumps(image), timeout=timeout)
 
-    return response
+    _, buffer = cv2.imencode(".jpg", pickle.loads(response))
+    io_buffer = BytesIO(buffer)
+    io_buffer.seek(0)
+
+    return Response(io_buffer.read(), media_type="image/jpeg")
