@@ -1,7 +1,7 @@
 import tempfile
 
 from fastapi import APIRouter, File, UploadFile
-from fastapi.responses import Response
+from fastapi.responses import Response, FileResponse
 from simber import Logger
 
 router = APIRouter()
@@ -19,10 +19,6 @@ async def download(file: UploadFile = File(...)):
             temp_file.write(file.file.read())
 
         with open(temp_file.name, "rb") as temp_file:
-            content = temp_file.read()
-            response = Response(content, media_type="application/octet-stream")
-            response.headers["Content-Disposition"] = 'attachment; filename="restored_face.jpeg"'
-        
-            return response
+            return FileResponse(temp_file.name, media_type='application/octet-stream', filename="restored_face.jpg")
     except Exception as e:
         logger.error(e)
