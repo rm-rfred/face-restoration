@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Grid, Stack } from "@mui/material";
+import { Button, CircularProgress, Grid, Stack } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useSnackbar } from "notistack";
 import { DropzoneArea } from "react-mui-dropzone";
@@ -17,8 +17,6 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#E7FFFF",
-    height: "60vh",
-    width: "100vh",
   },
   preview: {
     right: "25%",
@@ -28,8 +26,8 @@ const useStyles = makeStyles(() => ({
   },
   previewImg: {
     backgroundColor: "#E7FFFF",
-    width: "50vh",
-    height: "30vh",
+    width: "200px",
+    height: "156px",
   },
 }));
 
@@ -41,6 +39,7 @@ interface Props {
   selectedFile: File | null;
   setSelectedFile: React.Dispatch<React.SetStateAction<File | null>>;
   setRestoredFile: React.Dispatch<React.SetStateAction<any>>;
+  isFetching: boolean;
   setIsFetching: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -48,6 +47,7 @@ export const FileUpload: React.FC<Props> = ({
   selectedFile,
   setSelectedFile,
   setRestoredFile,
+  isFetching,
   setIsFetching,
 }) => {
   const classes = useStyles();
@@ -100,12 +100,15 @@ export const FileUpload: React.FC<Props> = ({
     <>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Stack spacing={1}>
+          <Stack spacing={1} justifyContent="center" alignItems="center">
             <Grid
               container
               justifyContent="center"
               alignItems="center"
-              style={{ maxWidth: "80vh", maxHeight: "80vh" }}
+              style={{
+                maxWidth: "80vh",
+                maxHeight: "80vh",
+              }}
             >
               <DropzoneArea
                 acceptedFiles={["image/*"]}
@@ -130,9 +133,13 @@ export const FileUpload: React.FC<Props> = ({
                 onChange={handleFileChange}
               />
             </Grid>
-            <Button type="submit" variant="outlined">
-              COMPUTE FACE RESTORATION
-            </Button>
+            {isFetching ? (
+              <CircularProgress />
+            ) : (
+              <Button type="submit" variant="outlined">
+                COMPUTE FACE RESTORATION
+              </Button>
+            )}
           </Stack>
         </form>
       </FormProvider>
