@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import DownloadIcon from "@mui/icons-material/Download";
-import { CssBaseline, Grid, Stack } from "@mui/material";
+import { Button, CssBaseline, Grid, Stack } from "@mui/material";
 
 import FileUpload from "./components/FileUpload";
 import ReactCompareImage from "react-compare-image";
-import { apiFetchBlob } from "./utils/Fetch";
-import { useSnackbar } from "notistack";
 
 function App() {
   const [isFetching, setIsFetching] = useState<boolean>(false);
@@ -59,7 +57,7 @@ function App() {
   });
 
   const onSubmit = () => {
-    if (selectedFile) {
+    if (restoredFile) {
       const url = window.URL.createObjectURL(restoredFile.blob);
       const a = document.createElement("a");
       a.href = url;
@@ -99,7 +97,11 @@ function App() {
                     />
                   </Grid>
                 )}
-                {restoredFile && <DownloadIcon onClick={onSubmit} />}
+                {restoredFile && (
+                  <Button variant="outlined" type="submit" onClick={onSubmit}>
+                    <DownloadIcon sx={{ color: "#E7FFFF" }} />
+                  </Button>
+                )}
               </Stack>
             </Grid>
           </Grid>
