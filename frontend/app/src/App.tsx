@@ -69,24 +69,24 @@ function App() {
                   isFetching={isFetching}
                   setIsFetching={setIsFetching}
                 />
+                {selectedFile && restoredFile && (
+                  <Grid
+                    container
+                    justifyContent="center"
+                    alignItems="center"
+                    style={{ maxWidth: "30%", maxHeight: "300px" }}
+                  >
+                    <ReactCompareImage
+                      leftImageCss={{ objectFit: "contain" }}
+                      rightImageCss={{ objectFit: "contain" }}
+                      leftImage={URL.createObjectURL(selectedFile)}
+                      rightImage={URL.createObjectURL(restoredFile.blob)}
+                    />
+                  </Grid>
+                )}
               </Stack>
             </Grid>
           </Grid>
-          {selectedFile && restoredFile && (
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              style={{ maxWidth: "30%", maxHeight: "300px" }}
-            >
-              <ReactCompareImage
-                leftImageCss={{ objectFit: "contain" }}
-                rightImageCss={{ objectFit: "contain" }}
-                leftImage={URL.createObjectURL(selectedFile)}
-                rightImage={URL.createObjectURL(restoredFile.blob)}
-              />
-            </Grid>
-          )}
         </Stack>
       </CssBaseline>
     </ThemeProvider>
