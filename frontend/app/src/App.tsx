@@ -16,7 +16,6 @@ function App() {
   useEffect(() => {
     document.title = "Face restoration";
   }, []);
-  const { enqueueSnackbar } = useSnackbar();
 
   const theme = createTheme({
     palette: {
@@ -60,49 +59,17 @@ function App() {
   });
 
   const onSubmit = () => {
-    setIsFetching(true);
-
     if (selectedFile) {
-      const formDataToSend = new FormData();
-      formDataToSend.append("file", selectedFile);
-
-      apiFetchBlob("/api/face_restoration/restore", "POST", {}, formDataToSend)
-        .then((response) => {
-          // Create a Blob from the response
-          const blob = new Blob([response], {
-            type: "application/octet-stream",
-          });
-
-          // Create a Blob URL
-          const url = window.URL.createObjectURL(blob);
-
-          // Create an anchor element to trigger the download
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = "restored_face.jpg"; // Specify the desired filename
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-        })
-        .catch((error) => {
-          enqueueSnackbar("An error occurred", {
-            variant: "error",
-            autoHideDuration: 3000,
-          });
-          console.error("Error:", error);
-        })
-        .finally(() => setIsFetching(false));
-    } else {
-      enqueueSnackbar("Please select an image", {
-        variant: "error",
-        autoHideDuration: 3000,
-      });
-      console.error("No file selected.");
-      setIsFetching(false);
+      const url = window.URL.createObjectURL(restoredFile.blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "restored_face.jpg";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
   };
 
-  console.log({ restoredFile });
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme>
