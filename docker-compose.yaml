@@ -41,8 +41,6 @@ services:
   face-restoration-worker:
     image: rmrfred/face-restoration-worker:latest
     restart: always
-    env_file:
-        - .env
     environment:
         MODELS_PATH: ${MODELS_PATH}
         DEVICE: ${DEVICE}

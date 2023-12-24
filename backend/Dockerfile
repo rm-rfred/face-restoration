@@ -16,7 +16,7 @@ RUN python3.10 get-pip.py
 RUN rm get-pip.py
 
 # OpenCV requirements
-RUN python3.10 -m pip install --upgrade pip==23.3.1
+RUN python3.10 -m pip install --upgrade pip==23.3.2
 RUN apt update && apt install -y libsm6 libxext6 libxrender-dev libgl1-mesa-glx
 
 
