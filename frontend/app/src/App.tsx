@@ -90,11 +90,11 @@ function App() {
               container
               justifyContent="center"
               alignItems="center"
-              style={{ maxWidth: "120px", maxHeight: "120px" }}
+              style={{ maxWidth: "30vh" }}
             >
               <Grid
                 item
-                sx={{ width: "120px", height: "120px" }}
+                sx={{ width: "70vh" }}
                 alignContent="center"
                 justifyContent="center"
               >
