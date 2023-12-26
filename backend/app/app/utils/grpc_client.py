@@ -27,7 +27,7 @@ class GrpcClient:
     @staticmethod
     def face_restoration(
         endpoint: str,
-        image,
+        image: bytes,
         background_enhance: bool = False,
         face_upsample: bool = True,
         upscale: int = 2,
