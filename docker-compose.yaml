@@ -42,7 +42,7 @@ services:
     image: rmrfred/face-restoration-worker:latest
     restart: always
     environment:
-        MODELS_PATH: ${MODELS_PATH}
+        MODELS_PATH: /models/
         DEVICE: ${DEVICE}
     volumes:
       - /srv/docker/face-restoration-worker/logs:/logs
