@@ -16,9 +16,21 @@ import {
 
 import HelpIcon from "@mui/icons-material/Help";
 
-interface Props {}
+interface Props {
+  backgroundEnhance: boolean;
+  setBackgroundEnhance: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-export const Settings: React.FC<Props> = ({}) => {
+export const Settings: React.FC<Props> = ({
+  backgroundEnhance,
+  setBackgroundEnhance,
+}) => {
+  const handleBackgroundEnhanceChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setBackgroundEnhance(event.target.checked);
+  };
+
   return (
     <Paper
       style={{
@@ -38,7 +50,12 @@ export const Settings: React.FC<Props> = ({}) => {
         <Grid container>
           <Grid md={11}>
             <FormControlLabel
-              control={<Checkbox />}
+              control={
+                <Checkbox
+                  checked={backgroundEnhance}
+                  onChange={handleBackgroundEnhanceChange}
+                />
+              }
               label="Background enhance"
             />
           </Grid>
@@ -50,10 +67,7 @@ export const Settings: React.FC<Props> = ({}) => {
         </Grid>
         <Grid container>
           <Grid md={11}>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label="Upsample"
-            />
+            <FormControlLabel control={<Checkbox />} label="Upsample" />
           </Grid>
           <Grid xs={6} md={1} alignContent="center">
             <Tooltip

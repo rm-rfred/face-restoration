@@ -141,7 +141,10 @@ function App() {
             position="fixed"
           >
             <Grid xs>
-              <Settings />
+              <Settings
+                backgroundEnhance={backgroundEnhance}
+                setBackgroundEnhance={setBackgroundEnhance}
+              />
             </Grid>
           </Grid>
         </Grid>
