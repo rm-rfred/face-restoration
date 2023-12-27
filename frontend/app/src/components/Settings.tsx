@@ -69,7 +69,6 @@ export const Settings: React.FC<Props> = ({
     >
       <CardHeader
         avatar={<Avatar aria-label="recipe" src="/codeformer_icon.png" />}
-        action={<IconButton aria-label="settings"></IconButton>}
         title="CodeFormer settings"
       />
       <FormGroup>
