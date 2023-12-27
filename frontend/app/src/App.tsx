@@ -145,6 +145,8 @@ function App() {
                 setBackgroundEnhance={setBackgroundEnhance}
                 faceUpsample={faceUpsample}
                 setFaceUpsample={setFaceUpsample}
+                upscale={upscale}
+                setUpscale={setUpscale}
               />
             </Grid>
           </Grid>

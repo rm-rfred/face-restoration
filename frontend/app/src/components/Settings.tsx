@@ -21,6 +21,8 @@ interface Props {
   setBackgroundEnhance: React.Dispatch<React.SetStateAction<boolean>>;
   faceUpsample: boolean;
   setFaceUpsample: React.Dispatch<React.SetStateAction<boolean>>;
+  upscale: number;
+  setUpscale: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const Settings: React.FC<Props> = ({
@@ -28,6 +30,8 @@ export const Settings: React.FC<Props> = ({
   setBackgroundEnhance,
   faceUpsample,
   setFaceUpsample,
+  upscale,
+  setUpscale,
 }) => {
   const handleBackgroundEnhanceChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -37,6 +41,10 @@ export const Settings: React.FC<Props> = ({
 
   const handleUpsampleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFaceUpsample(event.target.checked);
+  };
+
+  const handleUpscaleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUpscale(parseInt(event.target.value));
   };
 
   return (
@@ -98,7 +106,13 @@ export const Settings: React.FC<Props> = ({
           <Grid item md={11}>
             <FormControlLabel
               style={{ width: "80%" }}
-              control={<TextField type="number" />}
+              control={
+                <TextField
+                  value={upscale}
+                  onChange={handleUpscaleChange}
+                  type="number"
+                />
+              }
               label="upscale"
               labelPlacement="top"
             />
