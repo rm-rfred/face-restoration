@@ -11,6 +11,11 @@ function App() {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [restoredFile, setRestoredFile] = useState<any>(null);
+  const [backgroundEnhance, setBackgroundEnhance] = useState<boolean>(false);
+  const [faceUpsample, setFaceUpsample] = useState<boolean>(true);
+  const [upscale, setUpscale] = useState<number>(2);
+  const [codeformerFidelity, setCodeformerFidelity] = useState<number>(0.7);
+
   useEffect(() => {
     document.title = "Face restoration";
   }, []);
@@ -81,6 +86,10 @@ function App() {
                   setRestoredFile={setRestoredFile}
                   isFetching={isFetching}
                   setIsFetching={setIsFetching}
+                  backgroundEnhance={backgroundEnhance}
+                  faceUpsample={faceUpsample}
+                  upscale={upscale}
+                  codeformerFidelity={codeformerFidelity}
                 />
               </Stack>
             </Grid>

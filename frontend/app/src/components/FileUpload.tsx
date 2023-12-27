@@ -33,6 +33,7 @@ const useStyles = makeStyles(() => ({
 
 type FormData = {
   file: FileList | null;
+  backgroundEnhance: boolean;
 };
 
 interface Props {
@@ -41,6 +42,10 @@ interface Props {
   setRestoredFile: React.Dispatch<React.SetStateAction<any>>;
   isFetching: boolean;
   setIsFetching: React.Dispatch<React.SetStateAction<boolean>>;
+  backgroundEnhance: boolean;
+  faceUpsample: boolean;
+  upscale: number;
+  codeformerFidelity: number;
 }
 
 export const FileUpload: React.FC<Props> = ({
@@ -49,6 +54,10 @@ export const FileUpload: React.FC<Props> = ({
   setRestoredFile,
   isFetching,
   setIsFetching,
+  backgroundEnhance,
+  faceUpsample,
+  upscale,
+  codeformerFidelity,
 }) => {
   const classes = useStyles();
   const methods = useForm<FormData>();
@@ -65,6 +74,13 @@ export const FileUpload: React.FC<Props> = ({
     if (selectedFile) {
       const formDataToSend = new FormData();
       formDataToSend.append("file", selectedFile);
+      formDataToSend.append("background_enhance", backgroundEnhance.toString());
+      formDataToSend.append("face_upsample", faceUpsample.toString());
+      formDataToSend.append("upscale", upscale.toString());
+      formDataToSend.append(
+        "codeformer_fidelity",
+        codeformerFidelity.toString()
+      );
 
       apiFetchBlob("/api/face_restoration/restore", "POST", {}, formDataToSend)
         .then((response) => {
