@@ -124,6 +124,7 @@ export const FileUpload: React.FC<Props> = ({
               style={{
                 maxWidth: "80vh",
                 maxHeight: "80vh",
+                paddingTop: "10%",
               }}
             >
               <DropzoneArea
