@@ -18,10 +18,6 @@ logger.update_format(LOG_FORMAT)
 
 router = APIRouter()
 
-class ImageRequest(BaseModel):
-    background_enhance: bool
-
-
 @router.get("/", status_code=200)
 def hello_world():
     return {"message": "Hello World"}
