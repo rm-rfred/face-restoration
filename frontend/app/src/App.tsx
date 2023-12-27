@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import DownloadIcon from "@mui/icons-material/Download";
-import { Button, CssBaseline, Grid, Stack } from "@mui/material";
+import { Box, Button, CssBaseline, Grid, Stack } from "@mui/material";
 
 import FileUpload from "./components/FileUpload";
 import ReactCompareImage from "react-compare-image";
+import { Settings } from "./components/Settings";
 
 function App() {
   const [isFetching, setIsFetching] = useState<boolean>(false);
@@ -76,54 +77,74 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme>
-        <Stack alignItems="center" spacing={2}>
-          <Grid container justifyContent="center" alignItems="center">
-            <Grid item justifyContent="center" xs={8} md={8}>
-              <Stack alignItems="center">
-                <FileUpload
-                  selectedFile={selectedFile}
-                  setSelectedFile={setSelectedFile}
-                  setRestoredFile={setRestoredFile}
-                  isFetching={isFetching}
-                  setIsFetching={setIsFetching}
-                  backgroundEnhance={backgroundEnhance}
-                  faceUpsample={faceUpsample}
-                  upscale={upscale}
-                  codeformerFidelity={codeformerFidelity}
-                />
-              </Stack>
+        <Grid container rowSpacing={1}>
+          <Grid xs={6}>
+            <Stack alignItems="center" spacing={2}>
+              <Grid container justifyContent="center" alignItems="center">
+                <Grid item justifyContent="center" xs={8} md={8}>
+                  <Stack alignItems="center">
+                    <FileUpload
+                      selectedFile={selectedFile}
+                      setSelectedFile={setSelectedFile}
+                      setRestoredFile={setRestoredFile}
+                      isFetching={isFetching}
+                      setIsFetching={setIsFetching}
+                      backgroundEnhance={backgroundEnhance}
+                      faceUpsample={faceUpsample}
+                      upscale={upscale}
+                      codeformerFidelity={codeformerFidelity}
+                    />
+                  </Stack>
+                </Grid>
+              </Grid>
+              {selectedFile && restoredFile && (
+                <Grid
+                  container
+                  justifyContent="center"
+                  alignItems="center"
+                  style={{ maxWidth: "30vh" }}
+                >
+                  <Grid
+                    item
+                    sx={{ width: "70vh" }}
+                    alignContent="center"
+                    justifyContent="center"
+                  >
+                    <Stack>
+                      <ReactCompareImage
+                        leftImageCss={{ objectFit: "contain" }}
+                        rightImageCss={{ objectFit: "contain" }}
+                        leftImage={URL.createObjectURL(selectedFile)}
+                        rightImage={URL.createObjectURL(restoredFile.blob)}
+                      />
+                      {restoredFile && (
+                        <Button
+                          variant="outlined"
+                          type="submit"
+                          onClick={onSubmit}
+                        >
+                          <DownloadIcon sx={{ color: "#E7FFFF" }} />
+                        </Button>
+                      )}
+                    </Stack>
+                  </Grid>
+                </Grid>
+              )}
+            </Stack>
+          </Grid>
+          <Grid
+            container
+            xs={6}
+            alignContent="flex"
+            top="25%"
+            left="60%"
+            position="fixed"
+          >
+            <Grid xs>
+              <Settings />
             </Grid>
           </Grid>
-          {selectedFile && restoredFile && (
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              style={{ maxWidth: "30vh" }}
-            >
-              <Grid
-                item
-                sx={{ width: "70vh" }}
-                alignContent="center"
-                justifyContent="center"
-              >
-                <Stack>
-                  <ReactCompareImage
-                    leftImageCss={{ objectFit: "contain" }}
-                    rightImageCss={{ objectFit: "contain" }}
-                    leftImage={URL.createObjectURL(selectedFile)}
-                    rightImage={URL.createObjectURL(restoredFile.blob)}
-                  />
-                  {restoredFile && (
-                    <Button variant="outlined" type="submit" onClick={onSubmit}>
-                      <DownloadIcon sx={{ color: "#E7FFFF" }} />
-                    </Button>
-                  )}
-                </Stack>
-              </Grid>
-            </Grid>
-          )}
-        </Stack>
+        </Grid>
       </CssBaseline>
     </ThemeProvider>
   );
