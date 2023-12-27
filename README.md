@@ -23,6 +23,10 @@ docker-compose up -d
 
 The app should be available on your [browser](http://172.17.0.1:10134)
 
+## Architecture
+
+![Project Archiecture](./frontend/images/architecture.png)
+
 ## Inference on GPU
 
 In order to run inference on your GPU, you **must** have :
