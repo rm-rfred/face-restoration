@@ -147,6 +147,8 @@ function App() {
                 setFaceUpsample={setFaceUpsample}
                 upscale={upscale}
                 setUpscale={setUpscale}
+                codeformerFidelity={codeformerFidelity}
+                setCodeformerFidelity={setCodeformerFidelity}
               />
             </Grid>
           </Grid>

@@ -23,6 +23,8 @@ interface Props {
   setFaceUpsample: React.Dispatch<React.SetStateAction<boolean>>;
   upscale: number;
   setUpscale: React.Dispatch<React.SetStateAction<number>>;
+  codeformerFidelity: number;
+  setCodeformerFidelity: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const Settings: React.FC<Props> = ({
@@ -32,6 +34,8 @@ export const Settings: React.FC<Props> = ({
   setFaceUpsample,
   upscale,
   setUpscale,
+  codeformerFidelity,
+  setCodeformerFidelity,
 }) => {
   const handleBackgroundEnhanceChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -45,6 +49,12 @@ export const Settings: React.FC<Props> = ({
 
   const handleUpscaleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUpscale(parseInt(event.target.value));
+  };
+
+  const handleFidelityChange = (event: Event, newValue: number | number[]) => {
+    if (typeof newValue === "number") {
+      setCodeformerFidelity(newValue);
+    }
   };
 
   return (
@@ -130,7 +140,8 @@ export const Settings: React.FC<Props> = ({
               control={
                 <Slider
                   aria-label="Fidelity"
-                  defaultValue={0.7}
+                  defaultValue={codeformerFidelity}
+                  onChange={handleFidelityChange}
                   step={0.01}
                   min={0}
                   max={1}
