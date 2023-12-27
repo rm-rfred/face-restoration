@@ -56,7 +56,7 @@ export const Settings: React.FC<Props> = ({
       />
       <FormGroup>
         <Grid container>
-          <Grid md={11}>
+          <Grid item md={11}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -67,14 +67,14 @@ export const Settings: React.FC<Props> = ({
               label="Background enhance"
             />
           </Grid>
-          <Grid xs={6} md={1} alignContent="center">
+          <Grid item xs={6} md={1} alignContent="center">
             <Tooltip title="Enhance background regions with Real-ESRGAN">
               <HelpIcon />
             </Tooltip>
           </Grid>
         </Grid>
         <Grid container>
-          <Grid md={11}>
+          <Grid item md={11}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -85,7 +85,7 @@ export const Settings: React.FC<Props> = ({
               label="Upsample"
             />
           </Grid>
-          <Grid xs={6} md={1} alignContent="center">
+          <Grid item xs={6} md={1} alignContent="center">
             <Tooltip
               title="Upsample"
               style={{ alignItems: "right", right: "2px" }}
@@ -95,7 +95,7 @@ export const Settings: React.FC<Props> = ({
           </Grid>
         </Grid>
         <Grid container>
-          <Grid md={11}>
+          <Grid item md={11}>
             <FormControlLabel
               style={{ width: "80%" }}
               control={<TextField type="number" />}
@@ -103,14 +103,14 @@ export const Settings: React.FC<Props> = ({
               labelPlacement="top"
             />
           </Grid>
-          <Grid xs={6} md={1} alignContent="center">
+          <Grid item xs={6} md={1} alignContent="center">
             <Tooltip title="Rescaling factor (up to 4)">
               <HelpIcon />
             </Tooltip>
           </Grid>
         </Grid>
         <Grid container>
-          <Grid md={11}>
+          <Grid item md={11}>
             <FormControlLabel
               style={{ width: "80%" }}
               control={
@@ -127,7 +127,7 @@ export const Settings: React.FC<Props> = ({
               labelPlacement="top"
             />
           </Grid>
-          <Grid md={1} alignContent="center">
+          <Grid item md={1} alignContent="center">
             <Tooltip title="0 for better quality, 1 for better identity">
               <HelpIcon />
             </Tooltip>

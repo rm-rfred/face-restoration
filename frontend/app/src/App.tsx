@@ -78,7 +78,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme>
         <Grid container rowSpacing={1}>
-          <Grid xs={6}>
+          <Grid item xs={6}>
             <Stack alignItems="center" spacing={2}>
               <Grid container justifyContent="center" alignItems="center">
                 <Grid item justifyContent="center" xs={8} md={8}>
@@ -134,13 +134,12 @@ function App() {
           </Grid>
           <Grid
             container
-            xs={6}
             alignContent="flex"
             top="25%"
             left="60%"
             position="fixed"
           >
-            <Grid xs>
+            <Grid item xs={6}>
               <Settings
                 backgroundEnhance={backgroundEnhance}
                 setBackgroundEnhance={setBackgroundEnhance}
