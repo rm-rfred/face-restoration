@@ -19,16 +19,24 @@ import HelpIcon from "@mui/icons-material/Help";
 interface Props {
   backgroundEnhance: boolean;
   setBackgroundEnhance: React.Dispatch<React.SetStateAction<boolean>>;
+  faceUpsample: boolean;
+  setFaceUpsample: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Settings: React.FC<Props> = ({
   backgroundEnhance,
   setBackgroundEnhance,
+  faceUpsample,
+  setFaceUpsample,
 }) => {
   const handleBackgroundEnhanceChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setBackgroundEnhance(event.target.checked);
+  };
+
+  const handleUpsampleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFaceUpsample(event.target.checked);
   };
 
   return (
@@ -67,7 +75,15 @@ export const Settings: React.FC<Props> = ({
         </Grid>
         <Grid container>
           <Grid md={11}>
-            <FormControlLabel control={<Checkbox />} label="Upsample" />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={faceUpsample}
+                  onChange={handleUpsampleChange}
+                />
+              }
+              label="Upsample"
+            />
           </Grid>
           <Grid xs={6} md={1} alignContent="center">
             <Tooltip

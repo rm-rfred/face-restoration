@@ -144,6 +144,8 @@ function App() {
               <Settings
                 backgroundEnhance={backgroundEnhance}
                 setBackgroundEnhance={setBackgroundEnhance}
+                faceUpsample={faceUpsample}
+                setFaceUpsample={setFaceUpsample}
               />
             </Grid>
           </Grid>
