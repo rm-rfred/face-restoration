@@ -27,6 +27,10 @@ The app should be available on your [browser](http://172.17.0.1:10134)
 
 ![Project Archiecture](./frontend/images/architecture.png)
 
+## Model: CodeFormer (Shangchen Zhou, Kelvin C.K. Chan, Chongyi Li, Chen Change Loy)
+
+The face restoration task is handled by a Transformer-based prediction network named CodeFormer. To learn more about the model, check out the [paper](https://arxiv.org/abs/2206.11253) and the [github project](https://github.com/sczhou/CodeFormer).
+
 ## Inference on GPU
 
 In order to run inference on your GPU, you **must** have :
