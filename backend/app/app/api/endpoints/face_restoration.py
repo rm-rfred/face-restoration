@@ -1,6 +1,5 @@
 from io import BytesIO
 import pickle
-from pydantic import BaseModel
 import tempfile
 
 import cv2
@@ -35,6 +34,7 @@ async def post_image(
 ):
     with tempfile.NamedTemporaryFile(suffix=".png", delete=True) as temp_file:
         temp_file.write(file)
+        temp_file.flush()
         temp_file_path = temp_file.name
 
         image = cv2.imread(temp_file_path)
