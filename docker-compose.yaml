@@ -5,7 +5,7 @@ services:
     restart: always
     volumes:
         - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-        - /srv/docker/ner/logs:/var/log/nginx/
+        - /srv/docker/face-restoration/logs:/var/log/nginx/
     ports:
         - 10134:80
     depends_on:
